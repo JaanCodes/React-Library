@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Book from "../components/ui/Book";
 
 const Books = ({ books: initialBooks }) => {
   const [books, setBooks] = useState(initialBooks);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   function filterBooks(filter) {
     if (filter === "LOW_TO_HIGH") {
@@ -40,7 +44,7 @@ const Books = ({ books: initialBooks }) => {
             <div className="row">
               <div className="books__header">
                 <h2 className="section__title books__header--title">
-                  All Books
+                  All <span className="purple">Books</span>
                 </h2>
                 <select
                   id="filter"
