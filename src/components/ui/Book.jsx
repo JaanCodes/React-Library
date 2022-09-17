@@ -6,14 +6,14 @@ import Rating from "./Rating";
 const Book = ({ book }) => {
   return (
     <div className="book">
-      <Link to={`/books/${book.title.toLowerCase()}`}>
+      <Link to={`/books/${book.title.toLowerCase().replaceAll(" ", "-")}`}>
         <figure className="book__img--wrapper">
           <img src={book.url} alt="" className="book__img" />
         </figure>
       </Link>
       <div className="book__title">
         <Link
-          to={`/books/${book.title.toLowerCase()}`}
+          to={`/books/${book.title.toLowerCase().replaceAll(" ", "-")}`}
           className="book__title--link"
         >
           {book.title}

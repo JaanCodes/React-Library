@@ -29,17 +29,17 @@ const Nav = ({ numberOfItems }) => {
               Books
             </Link>
           </li>
-          <button className="btn__menu" onClick={openMenu}>
-            <FontAwesomeIcon icon="bars" />
-          </button>
           <li className="nav__icon">
             <Link to="/cart" className="nav__link">
               <FontAwesomeIcon icon="shopping-cart" />
             </Link>
-            {numberOfItems > 0 && (
+            {numberOfItems && (
               <span className="cart__length">{numberOfItems()}</span>
             )}
           </li>
+          <button className="btn__menu" onClick={openMenu}>
+            <FontAwesomeIcon icon="bars" />
+          </button>
         </ul>
         <div className="menu__backdrop">
           <button className="btn__menu btn__menu--close" onClick={closeMenu}>

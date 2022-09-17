@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import EmptyCart from "../assets/empty_cart.svg";
 
 const Cart = ({ cart, changeQuantity, removeItem }) => {
-  const total = () => {
+  const subtotal = () => {
     let price = 0;
     cart.forEach((item) => {
       price += +(
@@ -88,15 +88,15 @@ const Cart = ({ cart, changeQuantity, removeItem }) => {
               <div className="total">
                 <div className="total__item total__sub-total">
                   <span>Subtotal</span>
-                  <span>${(total() * 0.9).toFixed(2)}</span>
+                  <span>${subtotal().toFixed(2)}</span>
                 </div>
                 <div className="total__item total__tax">
                   <span>Tax</span>
-                  <span>${(total() * 0.1).toFixed(2)}</span>
+                  <span>${(subtotal() * 0.1).toFixed(2)}</span>
                 </div>
                 <div className="total__item total__price">
                   <span>Total</span>
-                  <span>{total().toFixed(2)}</span>
+                  <span>{(subtotal() + subtotal() * 0.1).toFixed(2)}</span>
                 </div>
                 <button
                   className="btn btn__checkout no-cursor"

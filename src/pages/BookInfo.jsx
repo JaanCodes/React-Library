@@ -4,18 +4,23 @@ import { Link, useParams } from "react-router-dom";
 import Book from "../components/ui/Book";
 import Price from "../components/ui/Price";
 import Rating from "../components/ui/Rating";
+import Icon from "../assets/icon.png";
 
 const BookInfo = ({ books, addToCart, cart }) => {
   const { title } = useParams();
-  const book = books.find((book) => book.title.toLowerCase() === title);
+  const book = books.find(
+    (book) => book.title.toLowerCase() === title.replaceAll("-", " ")
+  );
 
   function bookExistsOnCart() {
-    return cart.find((book) => book.title.toLowerCase() === title);
+    return cart.find(
+      (book) => book.title.toLowerCase().replaceAll(" ", "-") === title
+    );
   }
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  });
 
   return (
     <div id="books__body">
@@ -45,16 +50,7 @@ const BookInfo = ({ books, addToCart, cart }) => {
                 </div>
                 <div className="book__summary">
                   <h3 className="book__summary--title">Summary</h3>
-                  <p className="book__summary--para">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Corrupti sed ex tempora nulla mollitia consequatur nobis
-                    doloremque possimus eum reiciendis!
-                  </p>
-                  <p className="book__summary--para">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Corrupti sed ex tempora nulla mollitia consequatur nobis
-                    doloremque possimus eum reiciendis!
-                  </p>
+                  <p className="book__summary--para">{book.summary}</p>
                 </div>
                 {bookExistsOnCart() ? (
                   <Link to={"/cart"}>
@@ -69,7 +65,6 @@ const BookInfo = ({ books, addToCart, cart }) => {
             </div>
           </div>
         </div>
-
         <div className="books__container">
           <div className="row">
             <div className="book__selected--top">
@@ -79,7 +74,8 @@ const BookInfo = ({ books, addToCart, cart }) => {
               {books
                 .filter(
                   (book) =>
-                    book.rating === 5 && book.title.toLowerCase() !== title
+                    book.rating === 5 &&
+                    book.title.toLowerCase() !== title.replaceAll("-", " ")
                 )
                 .slice(0, 4)
                 .map((book) => (
